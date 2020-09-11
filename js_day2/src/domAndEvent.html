@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+    
+    <div id="div1">Hello</div>
+    <div id="div2">med</div>
+    <div id="div3">dig</div>
+    
+    <button id="myBtn" type="button">Click me</button>
+    
+<script>
+    document.getElementById("myBtn").addEventListener("click", changeColor);
+    
+    var list = document.getElementsByTagName("div");
+    
+    list[0].style.backgroundColor = "red";
+    list[1].style.backgroundColor = "blue";
+    list[2].style.backgroundColor = "green";
+    
+    function changeColor() {
+        list[0].style.backgroundColor = "pink";
+        list[1].style.backgroundColor = "orange";
+        list[2].style.backgroundColor = "yellow";
+    }
+</script>
+
+</body>
+</html>
+
+

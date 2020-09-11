@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+
+        <form>
+            <input type="text" id="userID" value="">
+            <button id = "getUser" type="button">Get user by ID</button> 
+            <button id = "getAllUsers" type="button">Get all users</button> 
+        </form> 
+
+        <div id="dataContainer"></div>
+        <script>
+            document.getElementById("getUser").addEventListener("click", getUser);
+            document.getElementById("getAllUsers").addEventListener("click", getAll);
+
+            function getUser() {
+
+                let userID = document.getElementById("userID").value;
+                let URL = "https://jsonplaceholder.typicode.com/users/" + userID;
+
+                fetch(URL)
+                        .then(response => response.json())
+                        .then(data => exstractData(data))
+                //.then(data => console.log(data));
+
+            }
+
+            function exstractData(data) {
+                let htmlResponse = "<p>Name " + data.name + "</p>\n" +
+                        "<p>Phone: " + data.phone + "</p>\n" +
+                        "<p>Website: " + data.website + "</p>\n" +
+                        "<p>Username: " + data.username + "</p>\n\n" +
+                        "<h5>Address</h1>\n" +
+                        "<p>Street: " + data.address.street + "</p>\n" +
+                        "<p>City: " + data.address.city + "</p>\n" +
+                        "<p>Zip: " + data.address.zipcode + "</p>\n" +
+                        "<p>Geo: " + data.address.geo.lat + ", " + data.address.geo.lng + "</p>";
+                document.getElementById("dataContainer").innerHTML = htmlResponse;
+            }
+
+            function getAll() {
+                let url = "https://jsonplaceholder.typicode.com/users/";
+                fetch(url)
+                        .then(res => res.json()) 
+                        .then(data => {
+                            
+                            let htmlResponse = "<table><thead><th>ID</th><th>Name</th>" +
+                                    "<th>Phone</th><th>Email</th><th>City</th></thead><tbody>";
+                            data.map(person => {
+                                htmlResponse += "<tr>";
+                                htmlResponse += "<td>" + person.id + "</td>";
+                                htmlResponse += "<td>" + person.name + "</td>";
+                                htmlResponse += "<td>" + person.phone + "</td>";
+                                htmlResponse += "<td>" + person.email + "</td>";
+                                htmlResponse += "<td>" + person.address.city + "</td>";
+                                htmlResponse += "</tr>";
+                            });
+                            htmlResponse += "</tbody></table>";
+                            document.getElementById("dataContainer").innerHTML = htmlResponse;
+                        }
+                        );
+            }
+        </script>
+    </body>
+</html>

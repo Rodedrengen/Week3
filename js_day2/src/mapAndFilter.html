@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="output"></div>
+
+        <form>
+            <label for="price">Price</label>
+            <input type="text" id="price" name="fname" value="">
+            <button id = "priceLessThan" type="button">Price less than</button> 
+        </form>
+        <script>
+            
+            document.getElementById("priceLessThan").addEventListener("click",priceLessThan);
+            let input = document.getElementById("price");
+            
+            var cars = [
+                {id: 1, year: 1997, make: 'Ford', model: 'E350', price: 3000},
+                {id: 2, year: 1999, make: 'Chevy', model: 'Venture', price: 4900},
+                {id: 3, year: 2000, make: 'Chevy', model: 'Venture', price: 5000},
+                {id: 4, year: 1996, make: 'Jeep', model: 'Grand Cherokee', price: 4799},
+                {id: 5, year: 2005, make: 'Volvo', model: 'V70', price: 44799}
+            ];
+
+
+            document.getElementById("output").innerHTML = getTable(cars);
+
+            function getTable(table) {
+
+                let newTable = table.map(function (tableRow) {
+                    return "<tr><td>" + tableRow.id + "</td><td>" + tableRow.year + "</td><td>" + tableRow.make + "</td><td>" + tableRow.model + "</td><td>" + tableRow.price + "</td></tr>";
+                });
+
+                newTable.unshift("<table>");
+                newTable.push("</table>");
+                newTable.join("");
+                return newTable;
+            }
+            
+            function priceLessThan(){
+                
+                let filteredCars = cars.filter(function(car){
+                    return car.price < input.value;
+                });
+                
+                document.getElementById("output").innerHTML = getTable(filteredCars);
+            }
+        </script>
+
+    </body>
+</html>
+
+

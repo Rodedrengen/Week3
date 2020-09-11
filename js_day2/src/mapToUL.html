@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <style>
+
+    </style>
+    <body>
+
+        <div id="liste"></div>
+
+
+        <form>
+            <input type="text" id="fname" name="fname" value="John">
+            <button id = "submit" type="button">Submit</button> 
+        </form> 
+        
+        <button id = "removeFirst" type="button">remove first</button> 
+        <button id = "removeLast" type="button">remove last</button> 
+
+        <script>
+            let names = ["Ji", "Danica Manning", "Hazel Dawson", "Lorenzo Jefferson", "An", "Zainab Moss", "Anita Harrell", "Te", "Harleigh Roberson", "Zackary Mccarty"];
+            
+            document.getElementById("submit").addEventListener("click",submit);
+            document.getElementById("removeFirst").addEventListener("click",removeFirst);
+            document.getElementById("removeLast").addEventListener("click",removeLast);
+            document.getElementById("liste").innerHTML = htmlList(names);
+
+            function htmlList(names) {
+
+                let newNames = names.map(function (name) {
+                    return "<li>" + name + "</li>";
+                });
+
+                newNames.push("</ul>");
+                newNames.unshift("<ul>");
+
+                newNames = newNames.join("");
+
+                return newNames;
+            }
+            
+            function submit(evt){
+                
+                names.push(document.getElementById("fname").value);
+                
+                document.getElementById("liste").innerHTML = htmlList(names);
+            }
+            
+            function removeFirst(evt){
+                
+                names.shift();
+                document.getElementById("liste").innerHTML = htmlList(names);
+            }
+            
+            function removeLast(evt){
+                
+                names.pop();
+                document.getElementById("liste").innerHTML = htmlList(names);
+            }
+        </script>
+    </body>
+</html>
