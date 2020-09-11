@@ -1,3 +1,8 @@
+<h1> Status on code </h1>
+
+Movie project is not deployed. 
+All other exercises should be done as descriped below.
+
 <h1> Monday </h1>
 
 week3day2
